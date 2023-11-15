@@ -40,10 +40,10 @@ JCFLAGS := -d $(OUT_DIR)/ -cp $(SRC_DIR)/
 all: $(CLS)
 
 $(CLS): $(OUT_DIR)/%.class: $(SRC_DIR)/%.java
-    $(JC) $(JCFLAGS) $<
+	$(JC) $(JCFLAGS) $<
 
 ##
 # clean up any output files
 ##
 clean:
-    rm $(OUT_DIR)/*.class
+	rm $(OUT_DIR)/*.class
