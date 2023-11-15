@@ -17,4 +17,4 @@ clean:
 	$(RM) *.class
 	
 run:
-	java Main.class
+	java Main
