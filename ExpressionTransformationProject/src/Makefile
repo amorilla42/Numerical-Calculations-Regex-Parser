@@ -7,7 +7,7 @@ JC = javac
 	$(JC) $(JFLAGS) $*.java
 
 CLASSES = \
-		ExpressionTransformationProject/src/Main.java \
+		Main.java \
 
 default: classes
 
@@ -17,4 +17,4 @@ clean:
 	$(RM) *.class
 	
 run:
-	java ExpressionTransformationProject/src/Main.class
+	java Main.class
