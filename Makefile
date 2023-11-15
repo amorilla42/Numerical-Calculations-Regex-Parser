@@ -17,4 +17,4 @@ clean:
 	$(RM) *.class
 	
 run:
-	java main
+	java ExpressionTransformationProject/src/main
