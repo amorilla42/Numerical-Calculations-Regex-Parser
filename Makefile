@@ -6,7 +6,7 @@ JC = javac
 JFLAGS = -g
 
 # Define the source directory
-SRC_DIR = src
+SRC_DIR = Expresion\ Transformation\ Proyect/src
 
 # Define the build directory
 BUILD_DIR = build
