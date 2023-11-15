@@ -1,49 +1,20 @@
-##
-# source directory
-##
-SRC_DIR := ExpressionTransformationProject\src
+JFLAGS = -g
+JC = javac
 
-##
-# output directory
-##
-OUT_DIR := out
+.SUFFIXES: .java .class
 
-##
-# sources
-##
-SRCS := $(wildcard $(SRC_DIR)/*.java)
+.java.class:
+	$(JC) $(JFLAGS) $*.java
 
-##
-# classes
-## 
-CLS := $(SRCS:$(SRC_DIR)/%.java=$(OUT_DIR)/%.class)
+CLASSES = \
+		Main.java \
 
-##
-# compiler and compiler flags
-##
-JC := javac
-JCFLAGS := -d $(OUT_DIR)/ -cp $(SRC_DIR)/
+default: classes
 
-##
-# suffixes
-##
-.SUFFIXES: .java
+classes: $(CLASSES:.java=.class)
 
-##
-# targets that do not produce output files
-##
-.PHONY: all clean
-
-##
-# default target(s)
-##
-all: $(CLS)
-
-$(CLS): $(OUT_DIR)/%.class: $(SRC_DIR)/%.java
-	$(JC) $(JCFLAGS) $<
-
-##
-# clean up any output files
-##
 clean:
-	rm $(OUT_DIR)/*.class
+	$(RM) *.class
+	
+run:
+	java main
