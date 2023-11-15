@@ -7,7 +7,7 @@ JC = javac
 	$(JC) $(JFLAGS) $*.java
 
 CLASSES = \
-		Main.java \
+		ExpressionTransformationProject/src/Main.java \
 
 default: classes
 
