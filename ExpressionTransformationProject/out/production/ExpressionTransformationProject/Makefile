@@ -7,9 +7,6 @@ JC = javac
 	$(JC) $(JFLAGS) $*.java
 
 CLASSES = \
-		Lexer.java \
-		BinaryTree.java \
-		Parser.java \
 		Main.java \
 
 default: classes
