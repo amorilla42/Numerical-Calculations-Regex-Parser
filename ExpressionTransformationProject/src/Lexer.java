@@ -4,7 +4,6 @@ import java.util.List;
 public class Lexer {
 
     public List<Token> tokenizer(String line) {
-        //String[] split = line.split("[() ,]+");
 
         List<Token> tokens = new ArrayList<>();
         char c;
