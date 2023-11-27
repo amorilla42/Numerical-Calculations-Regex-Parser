@@ -1,0 +1,8 @@
+S     -> FUN PAR_A EXP COMMA EXP PAR_B
+EXP   -> FUN PAR_A EXP COMMA EXP PAR_B
+EXP   -> num ([+-]?[0-9]+(\.[0-9]+)?(e[+-]?[0-9]+)?)
+FUN   -> add|sub|div|mul|mod|pow
+PAR_A -> (
+PAR_B -> )
+COMMA -> ,
+

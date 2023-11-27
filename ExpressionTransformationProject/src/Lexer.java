@@ -11,37 +11,43 @@ public class Lexer {
         while(i< line.length()) {
             c = line.charAt(i);
             if (c == ')') {
-                tokens.add(new Token(Token.Type.PAR_B,""));
+                tokens.add(new Token(Token.Type.PAR_B));
                 i++;
             }else if (c=='(') {
-                tokens.add(new Token(Token.Type.PAR_A,""));
+                tokens.add(new Token(Token.Type.PAR_A));
                 i++;
             } else if (c == ',') {
-                tokens.add(new Token(Token.Type.COMMA,""));
+                tokens.add(new Token(Token.Type.COMMA));
                 i++;
-            } else if (c == 'a' && line.length()>(i+2) && line.charAt(i+1)=='d' && line.charAt(i+2) == 'd') {
-                tokens.add(new Token(Token.Type.FUN," + "));
+            } else if (c == 'a' && line.length()>(i+2)
+                    && line.charAt(i+1)=='d' && line.charAt(i+2) == 'd') {
+                tokens.add(new Token(Token.Type.FUN, Token.Operation.ADD));
                 i+=3;
-            } else if (c == 's' && line.length()>(i+2) && line.charAt(i+1)=='u' && line.charAt(i+2) == 'b') {
-                tokens.add(new Token(Token.Type.FUN," - "));
+            } else if (c == 's' && line.length()>(i+2)
+                    && line.charAt(i+1)=='u' && line.charAt(i+2) == 'b') {
+                tokens.add(new Token(Token.Type.FUN,Token.Operation.SUB));
                 i+=3;
-            }  else if (c == 'd' && line.length()>(i+2) && line.charAt(i+1)=='i' && line.charAt(i+2) == 'v') {
-                tokens.add(new Token(Token.Type.FUN," / "));
+            }  else if (c == 'd' && line.length()>(i+2)
+                    && line.charAt(i+1)=='i' && line.charAt(i+2) == 'v') {
+                tokens.add(new Token(Token.Type.FUN,Token.Operation.DIV));
                 i+=3;
-            }else if (c == 'p' && line.length()>(i+2) && line.charAt(i+1)=='o' && line.charAt(i+2) == 'w') {
-                tokens.add(new Token(Token.Type.FUN,"^"));
+            }else if (c == 'p' && line.length()>(i+2)
+                    && line.charAt(i+1)=='o' && line.charAt(i+2) == 'w') {
+                tokens.add(new Token(Token.Type.FUN,Token.Operation.POW));
                 i+=3;
-            }else if (c == 'm' && line.length()>(i+2) && line.charAt(i+1)=='u' && line.charAt(i+2) == 'l') {
-                tokens.add(new Token(Token.Type.FUN," * "));
+            }else if (c == 'm' && line.length()>(i+2)
+                    && line.charAt(i+1)=='u' && line.charAt(i+2) == 'l') {
+                tokens.add(new Token(Token.Type.FUN,Token.Operation.MUL));
                 i+=3;
-            }else if (c == 'm' && line.length()>(i+2) && line.charAt(i+1)=='o' && line.charAt(i+2) == 'd') {
-                tokens.add(new Token(Token.Type.FUN," % "));
+            }else if (c == 'm' && line.length()>(i+2)
+                    && line.charAt(i+1)=='o' && line.charAt(i+2) == 'd') {
+                tokens.add(new Token(Token.Type.FUN,Token.Operation.MOD));
                 i+=3;
             }
             else if (c == '+' || c == '-' || Character.isDigit(c)) {
                 StringBuilder num = new StringBuilder();
-                while ((c == '.' || c == '+' || c == '-' || c == 'e' || Character.isDigit(c)) && i < line.length()) {
-                    System.out.println(c);
+                while ((c == '.' || c == '+' || c == '-' || c == 'e'
+                        || Character.isDigit(c)) && i < line.length()) {
                     num.append(c);
                     i++;
                     if (i < line.length())
@@ -57,7 +63,7 @@ public class Lexer {
     }
 
     public void error() {
-        System.out.println("Syntax error");
+        System.out.println("Lexical error");
         System.exit(-1);
     }
 

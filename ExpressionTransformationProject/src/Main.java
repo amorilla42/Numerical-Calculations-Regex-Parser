@@ -8,13 +8,15 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
         Lexer lexer = new Lexer();
+        Parser parser = new Parser();
 
         try(Scanner sc = new Scanner(new File("test.txt"))){
             List<Token> tokens;
             while(sc.hasNextLine())
             {
                 tokens = lexer.tokenizer(sc.nextLine());
-                System.out.println(tokens);
+                BinaryTree abstractSyntaxTree = parser.parse(tokens);
+                //imprimir con parentesis
             }
 
 
