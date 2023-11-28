@@ -16,6 +16,7 @@ public class Main {
             {
                 tokens = lexer.tokenizer(sc.nextLine());
                 BinaryTree abstractSyntaxTree = parser.parse(tokens);
+                parser.printTree(abstractSyntaxTree);
                 //imprimir con parentesis
             }
 
