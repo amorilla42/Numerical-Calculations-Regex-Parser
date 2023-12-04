@@ -10,24 +10,20 @@ public class Main {
         Lexer lexer = new Lexer();
         Parser parser = new Parser();
 
-        try(Scanner sc = new Scanner(new File("test.txt"))){
+        try(Scanner sc = new Scanner(new File("tesdt.txt"))){
             List<Token> tokens;
             while(sc.hasNextLine())
             {
-                tokens = lexer.tokenizer(sc.nextLine());
-                BinaryTree abstractSyntaxTree = parser.parse(tokens);
-                parser.printTree(abstractSyntaxTree);
-                //imprimir con parentesis
+                String line= sc.nextLine();
+                if(!line.isEmpty()){
+                    tokens = lexer.tokenizer(line);
+                    BinaryTree abstractSyntaxTree = parser.parse(tokens);
+                    parser.printTree(abstractSyntaxTree);
+                    System.out.println();
+                }
             }
-
-
-
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
+        }catch (FileNotFoundException e) {
+            System.err.println("File doesnt exist");
         }
-
-
-
-
     }
 }

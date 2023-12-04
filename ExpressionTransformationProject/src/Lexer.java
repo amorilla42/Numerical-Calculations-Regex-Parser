@@ -57,7 +57,8 @@ public class Lexer {
                     tokens.add(new Token(Token.Type.NUM, num.toString()));
                 else
                     error();
-            }
+            }else
+                error();
         }
         return tokens;
     }

@@ -27,13 +27,13 @@ public class Parser {
                 st.push(NonTerminals.PAR_A);
                 st.push(NonTerminals.FUN);
             } else if (nt == NonTerminals.EXP && tokens.get(i).getType()== Token.Type.NUM) {
-                root = insertInAST(tokens.get(i),root,root);
+                root.insertInAST(tokens.get(i));
                 i++;
             } else if (nt == NonTerminals.FUN && tokens.get(i).getType()== Token.Type.FUN) {
                 if(root==null)
                     root = new BinaryTree(tokens.get(i));
                 else
-                    root = insertInAST(tokens.get(i),root,root);
+                    root.insertInAST(tokens.get(i));
                 i++;
             } else if (nt == NonTerminals.PAR_A && tokens.get(i).getType()== Token.Type.PAR_A) {
                 i++;
@@ -52,29 +52,30 @@ public class Parser {
         }
         return root;
     }
-
-    private BinaryTree insertInAST(Token elem, BinaryTree root, BinaryTree bin){
+/*
+    private boolean inssertInAST(Token elem, BinaryTree bin){
         BinaryTree ptr = bin;
         BinaryTree node = new BinaryTree(elem);
-
-        if (bin.isLeaf() && elem.getType()==Token.Type.FUN) {
+        if(bin==null)
+            return false;
+        if (bin.isLeaf()) {
             ptr.setLeft(node);
-        }else if (ptr.getLeft()==null && elem.getType()== Token.Type.NUM) {
-            ptr.setLeft(node);
+            return true;
         } else if (ptr.getLeft().getNode().getType()==Token.Type.NUM && ptr.getRight()==null) {
             ptr.setRight(node);
+            return true;
         } else if (ptr.getRight()!=null && ptr.getRight().getNode().getType()==Token.Type.FUN) {
-            insertInAST(elem,root,bin.getRight());
+            return insertInAST(elem,bin.getRight());
         } else if (ptr.getLeft().getNode().getType()==Token.Type.FUN && ptr.getRight()==null) {
-            insertInAST(elem,root,bin.getLeft());
-        } else if (ptr.getLeft().getNode().getType()==Token.Type.FUN && ptr.getLeft().getRight().getNode().getType()== Token.Type.FUN) {
-            insertInAST(elem,root,bin.getLeft().getRight());
-        } else if (ptr.getLeft().getNode().getType()== Token.Type.NUM && ptr.getRight().getNode().getType()== Token.Type.NUM){
-            root.setRight(node);
+            boolean hasBeenInserted;
+            hasBeenInserted = insertInAST(elem,bin.getLeft());
+            if(!hasBeenInserted)
+                ptr.setRight(new BinaryTree(elem));
+            return true;
         }
-        return bin;
+        return false;
     }
-
+*/
     private int operatorPrecedenceValue(Token t){
         if (t.getOperation()== Token.Operation.ADD || t.getOperation()== Token.Operation.SUB)
             return 0;
@@ -85,29 +86,47 @@ public class Parser {
         return 3;
     }
 
+    private void printFun(Token.Operation fun){
+        if (fun == Token.Operation.MOD)
+            System.out.print("%");
+        else if (fun == Token.Operation.MUL) {
+            System.out.print("*");
+        }else if (fun == Token.Operation.DIV) {
+            System.out.print("/");
+        }else if (fun == Token.Operation.ADD) {
+            System.out.print("+");
+        }else if (fun == Token.Operation.POW) {
+            System.out.print("^");
+        }else if (fun == Token.Operation.SUB) {
+            System.out.print("-");}
+    }
     public void printTree(BinaryTree tree){
-        int rootValue,childValue;
+        int leftChildValue,rootValue,rightChildValue;
+        boolean leftPar=false,rightPar=false;
 
-        if (tree.getNode().getType()==Token.Type.NUM) {
+        if(tree!=null && tree.isLeaf()){
             System.out.print(tree.getNode().getNum());
-        }else {
-            rootValue = operatorPrecedenceValue(tree.getNode());
-            if (tree.getLeft()!=null && tree.getLeft().getNode().getType()==Token.Type.FUN) {
-                childValue = operatorPrecedenceValue(tree.getLeft().getNode());
-                if (rootValue > childValue) {
-                    System.out.print('(');
-                    printTree(tree.getLeft());
-                    System.out.print(')');
-                }
+        }else if (tree!=null){
+            rootValue=operatorPrecedenceValue(tree.getNode());
+            if (tree.getLeft()!=null) {
+                leftChildValue = operatorPrecedenceValue(tree.getLeft().getNode());
+                leftPar = rootValue>leftChildValue;
             }
-            if (tree.getRight()!=null && tree.getRight().getNode().getType()==Token.Type.FUN){
-                childValue = operatorPrecedenceValue(tree.getRight().getNode());
-                if (rootValue > childValue){
-                    System.out.print('(');
-                    printTree(tree.getRight());
-                    System.out.print(')');
-                }
+            if (tree.getRight()!=null) {
+                rightChildValue = operatorPrecedenceValue(tree.getRight().getNode());
+                rightPar = rootValue>rightChildValue;
             }
-        } 
+            if (leftPar)
+                System.out.print("(");
+            printTree(tree.getLeft());
+            if (leftPar)
+                System.out.print(")");
+            printFun(tree.getNode().getOperation());
+            if (rightPar)
+                System.out.print("(");
+            printTree(tree.getRight());
+            if (rightPar)
+                System.out.print(")");
+        }
     }
 }
