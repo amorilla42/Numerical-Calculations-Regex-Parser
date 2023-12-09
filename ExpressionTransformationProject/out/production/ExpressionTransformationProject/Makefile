@@ -9,6 +9,7 @@ JC = javac
 CLASSES = \
 		Lexer.java \
 		BinaryTree.java \
+		Token.java \
 		Parser.java \
 		Main.java \
 
