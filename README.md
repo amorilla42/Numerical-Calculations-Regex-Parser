@@ -1,5 +1,5 @@
 # FormalLanguagesCalculator
-## Autor: Andres Morilla Morilla
+## Author: Andres Morilla Morilla
 ## Instructions to run the code on merlin server:
 - Go into the src directory "cd /FormalLanguagesCalculator/ExpressionTransformationProject/src"
 - Change the content of test.txt to the expressions that you want to transform
