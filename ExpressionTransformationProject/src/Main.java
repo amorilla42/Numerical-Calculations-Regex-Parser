@@ -10,7 +10,7 @@ public class Main {
         Lexer lexer = new Lexer();
         Parser parser = new Parser();
 
-        try(Scanner sc = new Scanner(new File("test.txt"))){
+        try(Scanner sc = new Scanner(new File("src/test.txt"))){
             List<Token> tokens;
             while(sc.hasNextLine())
             {
