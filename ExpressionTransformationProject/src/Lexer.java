@@ -101,6 +101,18 @@ public class Lexer {
         return (op.matches("[+-]?[0-9]+(\\.[0-9]+)?(e[+-]?[0-9]+)?"));
     }
 
+    /**
+    * This function removes both spaces and block comments from a given string.
+    *
+    * @param str The input string from which spaces and comments are to be removed.
+    * @return The string after removing spaces and block comments.
+    */
+    public static String removeSpacesAndComments(String str) {
+        // Remove block comments
+        String noComments = str.replaceAll("/\\*.*?\\*/", "");
+        // Remove spaces
+        return noComments.replaceAll("\\s+", "");
+    }
 }
 
 

@@ -1,5 +1,6 @@
 add(+5,10)
-add(5,mul(3e-42,2))
+   a  d  d  (  5  /* Hello world */, m  u l(3 e- 4 2, 2))
+
 sub(-5,4)
 pow(42,sub(3,3))
 add(5,mul(3,sub(10,pow(6,4))))
